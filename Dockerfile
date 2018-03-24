@@ -19,12 +19,13 @@ RUN apt-get update && \
 	chmod +x /Postman/Postman && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	export uid=${PUID} gid=${PGID} && \
+	mkdir -p /home/developer/.config/Postman && \
 	mkdir -p /home/developer/postman && \
 	echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
 	echo "developer:x:${uid}:" >> /etc/group && \
 	chown "${uid}:${gid}" -R /home/developer
 
-VOLUME /home/developer/postman
+VOLUME /home/developer/postman /home/developer/.config/Postman
 WORKDIR /home/developer/postman
 
 USER developer

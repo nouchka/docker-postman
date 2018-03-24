@@ -1,8 +1,14 @@
 #!/bin/bash
 
-docker run --rm \
+ADD_HOSTS=$(cat /etc/hosts|grep '\.'| egrep -v '(^#|^$|localhost|^127)'| awk '{print $1,$2}'| sed -r 's/^([a-z0-9\.\:]+)\s+(.+)$/--add-host=\2:\1/g')
+echo $ADD_HOSTS
+
+docker run --rm $ADD_HOSTS \
+	--name postman \
+	--hostname postman \
+	-v "$HOME/.config/Postman:/home/developer/.config/Postman" \
 	-v "$(pwd):/home/developer/postman" \
 	-v /etc/localtime:/etc/localtime:ro \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-e "DISPLAY=unix${DISPLAY}" \
-	nouchka/postman "$@"
+	nouchka/postman
