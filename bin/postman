@@ -2,7 +2,7 @@
 
 ADD_HOSTS=$(cat /etc/hosts|grep '\.'| egrep -v '(^#|^$|localhost|^127)'| awk '{print $1,$2}'| sed -r 's/^([a-z0-9\.\:]+)\s+(.+)$/--add-host=\2:\1/g')
 
-docker run --rm $ADD_HOSTS \
+docker run -d --rm $ADD_HOSTS \
 	--name postman \
 	--hostname postman \
 	-v "$HOME/.config/Postman:/home/developer/.config/Postman" \
