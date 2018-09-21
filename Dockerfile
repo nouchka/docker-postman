@@ -11,8 +11,18 @@ ENV PGID ${PGID}
 ARG FILE_URL=https://dl.pstmn.io/download/latest/linux64
 
 WORKDIR /tmp
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -yq --no-install-recommends install wget tar ca-certificates libcanberra-gtk-module libx11-xcb-dev libxtst-dev libxss-dev libgconf2-dev libnss3 && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq --no-install-recommends install \
+		wget=* \
+		tar=* \
+		ca-certificates=* \
+		libcanberra-gtk-module=* \
+		libx11-xcb-dev=* \
+		libxtst-dev=* \
+		libxss-dev=* \
+		libgconf2-dev=* \
+		libnss3=* && \
 	wget -qO- "${FILE_URL}" > /tmp/archive.tgz && \
 	sha256sum /tmp/archive.tgz && \
 	cat /tmp/archive.tgz| tar xzf - -C / && \
