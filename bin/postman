@@ -5,7 +5,6 @@ ADD_HOSTS=$(cat /etc/hosts|grep '\.'| egrep -v '(^#|^$|localhost|^127)'| awk '{p
 docker run -d --rm $ADD_HOSTS \
 	--name postman \
 	--hostname postman \
-##	-v /etc/hosts:/etc/hosts:ro \
 	-v "$HOME/.config/Postman:/home/developer/.config/Postman" \
 	-v "$(pwd):/home/developer/postman" \
 	-v /etc/localtime:/etc/localtime:ro \
