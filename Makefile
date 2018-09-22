@@ -1,13 +1,13 @@
-NAME=postman
+DOCKER_IMAGE=postman
+DOCKER_NAMESPACE=nouchka
+NAME=$(DOCKER_NAMESPACE)-$(DOCKER_IMAGE)
 VERSION=0.1
-DESCRIPTION=postman with docker in a package
-URL=https://github.com/nouchka/docker-postman
+DESCRIPTION=$(DOCKER_IMAGE) with docker in a package
+URL=https://github.com/nouchka/docker-$(DOCKER_IMAGE)
 VENDOR=katagena
 MAINTAINER=Jean-Avit Promis <docker@katagena.com>
 LICENSE=Apache License 2.0
 
-DOCKER_IMAGE=postman
-DOCKER_NAMESPACE=nouchka
 prefix = /usr/local
 
 .DEFAULT_GOAL := build
