@@ -13,7 +13,6 @@ prefix = /usr/local
 .DEFAULT_GOAL := build
 
 deb:
-	mkdir -p build/
 	mkdir -p build/usr/sbin/
 	cp -Rf bin/$(DOCKER_IMAGE) build/usr/sbin/
 
@@ -32,7 +31,7 @@ build:
 	docker build -t $(DOCKER_NAMESPACE)/$(DOCKER_IMAGE) .
 
 run:
-	./bin/postman
+	./bin/$(DOCKER_IMAGE)
 
 check:
 	docker run --rm -i hadolint/hadolint < Dockerfile
