@@ -8,6 +8,8 @@ docker run -d --rm $ADD_HOSTS \
 	-v "$HOME/.config/Postman:/home/developer/.config/Postman" \
 	-v "$(pwd):/home/developer/postman" \
 	-v /etc/localtime:/etc/localtime:ro \
+	-v /etc/hosts:/etc/hosts:ro \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-e "DISPLAY=unix${DISPLAY}" \
 	nouchka/postman
+

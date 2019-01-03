@@ -6,7 +6,9 @@ ARG PGID=1000
 ENV PUID ${PUID}
 ENV PGID ${PGID}
 
-ARG FILE_URL=https://dl.pstmn.io/download/latest/linux64
+ARG VERSION=6.6.1
+ARG FILE_SHA256SUM=397172c0c9533625a9d7a9725a9cd8d3a2ff5f56306f408c2b223acc86302a49
+ENV FILE_URL https://dl.pstmn.io/download/version/${VERSION}/linux64
 
 WORKDIR /tmp
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -23,7 +25,8 @@ RUN apt-get update && \
 		libnss3=* && \
 	wget -qO- "${FILE_URL}" > /tmp/archive.tgz && \
 	sha256sum /tmp/archive.tgz && \
-	cat /tmp/archive.tgz| tar xzf - -C / && \
+	echo "${FILE_SHA256SUM}  /tmp/archive.tgz"| sha256sum -c - && \
+	tar xzf /tmp/archive.tgz -C / && \
 	chmod +x /Postman/Postman && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	export uid=${PUID} gid=${PGID} && \
@@ -38,3 +41,4 @@ WORKDIR /home/developer/postman
 
 USER developer
 ENTRYPOINT [ "/Postman/Postman" ]
+
