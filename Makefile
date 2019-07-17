@@ -12,6 +12,8 @@ prefix = /usr/local
 
 .DEFAULT_GOAL := build
 
+VERSIONS=6 7
+
 deb:
 	mkdir -p build/usr/sbin/
 	cp -Rf bin/$(DOCKER_IMAGE) build/usr/sbin/
@@ -27,8 +29,16 @@ build-deb: deb
 push-deb: build-deb
 	package_cloud push nouchka/home/ubuntu/xenial $(NAME)_*.deb
 
-build:
-	docker build -t $(DOCKER_NAMESPACE)/$(DOCKER_IMAGE) .
+build-latest:
+	$(MAKE) -s build-version VERSION=latest
+
+build-version:
+	@chmod +x ./hooks/build
+	DOCKER_TAG=$(VERSION) IMAGE_NAME=$(DOCKER_NAMESPACE)/$(DOCKER_IMAGE):$(VERSION) ./hooks/build
+
+.PHONY: build
+build: build-latest
+	$(foreach version,$(VERSIONS), $(MAKE) -s build-version VERSION=$(version);)
 
 run:
 	./bin/$(DOCKER_IMAGE)
