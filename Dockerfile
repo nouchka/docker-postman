@@ -6,8 +6,8 @@ ARG PGID=1000
 ENV PUID ${PUID}
 ENV PGID ${PGID}
 
-ARG VERSION=6.7.1
-ARG FILE_SHA256SUM=3d2f1365f70e15b04fd1480485a833b4369b192950886e2406911fa33b9012f5
+ARG VERSION=7.2.2
+ARG FILE_SHA256SUM=9810b4de280e0c7107eb5b0a5ef29e6c7c93d4f807426f14b165f83a413307e2
 ENV FILE_URL https://dl.pstmn.io/download/version/${VERSION}/linux64
 
 WORKDIR /tmp
@@ -16,6 +16,7 @@ RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get -yq --no-install-recommends install \
 		wget=* \
 		tar=* \
+		fonts-takao-mincho=* \
 		ca-certificates=* \
 		libcanberra-gtk-module=* \
 		libx11-xcb-dev=* \
