@@ -1,7 +1,5 @@
 DOCKER_IMAGE=postman
 
-VERSIONS=6 7
-
 include Makefile.docker
 
 PACKAGE_VERSION=0.1

@@ -1,14 +1,13 @@
 FROM debian:stable-slim
-LABEL maintainer="Jean-Avit Promis docker@katagena.com"
 
 ARG PUID=1000
 ARG PGID=1000
 ENV PUID ${PUID}
 ENV PGID ${PGID}
 
-ARG VERSION=7.36
-ENV VERSION ${VERSION}
-ARG FILE_SHA256SUM=9810b4de280e0c7107eb5b0a5ef29e6c7c93d4f807426f14b165f83a413307e2
+ARG REPOSITORY=postmanlabs/postman-docs
+ARG VERSION=9.8.0
+ARG FILE_SHA256SUM=f9ee50db9d8340399981c0d6822068e520cbdabbc8d322ac537b0e9b32f4957c
 ENV FILE_URL https://dl.pstmn.io/download/version/${VERSION}/linux64
 
 WORKDIR /tmp
@@ -24,6 +23,12 @@ RUN apt-get update && \
 		libxtst-dev=* \
 		libxss-dev=* \
 		libgconf2-dev=* \
+		libgbm-dev=* \
+		libxshmfence1=* \
+		libatk-bridge2.0-0=* \
+		libdrm2=* \
+		libgtk-3-0=* \
+##		libglu1=* \
 		libnss3=* && \
 	wget -qO- "${FILE_URL}" > /tmp/archive.tgz && \
 	sha256sum /tmp/archive.tgz && \
