@@ -7,8 +7,8 @@ ENV PGID ${PGID}
 
 ARG REPOSITORY=postmanlabs/postman-docs
 ARG VERSION=9.15.0
-ARG FILE_SHA256SUM=762db2e11af2e14a855c0a856595351329694a9d288c29148360c6ddc6b3e943
-ENV FILE_URL https://dl.pstmn.io/download/version/${VERSION}/linux64
+ARG FILE_SHA256SUM=f82e4f7c7ce829e5bd32bd3165d5ae648245b9e4a28359a4124e834d5fad3299
+ENV FILE_URL https://dl.pstmn.io/download/latest/linux64
 
 WORKDIR /tmp
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
