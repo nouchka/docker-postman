@@ -5,9 +5,7 @@ ARG PGID=1000
 ENV PUID ${PUID}
 ENV PGID ${PGID}
 
-ARG REPOSITORY=postmanlabs/postman-docs
-ARG VERSION=9.15.0
-ARG FILE_SHA256SUM=f82e4f7c7ce829e5bd32bd3165d5ae648245b9e4a28359a4124e834d5fad3299
+ARG VERSION=9
 ENV FILE_URL https://dl.pstmn.io/download/latest/linux64
 
 WORKDIR /tmp
@@ -32,7 +30,6 @@ RUN apt-get update && \
 		libnss3=* && \
 	wget -qO- "${FILE_URL}" > /tmp/archive.tgz && \
 	sha256sum /tmp/archive.tgz && \
-	echo "${FILE_SHA256SUM}  /tmp/archive.tgz"| sha256sum -c - && \
 	tar xzf /tmp/archive.tgz -C / && \
 	chmod +x /Postman/Postman && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
